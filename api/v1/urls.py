@@ -17,6 +17,9 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls import url
 
+from .post import PostViewSet, PostDetailViewSet
+
 urlpatterns = [
-    path('v1/', include('api.v1.urls')),
+    path('posts/', PostViewSet.as_view()),
+    path('posts/<str:uuid>', PostDetailViewSet.as_view()),
 ]
