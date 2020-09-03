@@ -14,4 +14,4 @@ class PostAdmin(admin.ModelAdmin):
     list_per_page = 10
     form = PostForm
 
-# admin.site.register(Post, PostAdmin)
+admin.site.register(Post, PostAdmin)
