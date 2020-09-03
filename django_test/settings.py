@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'drf_yasg',  # swagger
     'django_filters',
     'api',
+    'app',
 ]
 
 SWAGGER_SETTINGS = {
