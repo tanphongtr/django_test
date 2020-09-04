@@ -6,7 +6,9 @@ from django_test.models import Post
 from .serializers import PostSerializer
 
 class PostViewSet(generics.ListCreateAPIView):
-    queryset = Post.objects.all()
+    queryset = Post.objects
+
+    print(queryset.query)
     serializer_class = PostSerializer
 
     @swagger_auto_schema(
@@ -16,7 +18,9 @@ class PostViewSet(generics.ListCreateAPIView):
         operation_summary='Test',
     )
     def get(self, request, *args, **kwargs):
-        return super().list(request, *args, **kwargs)
+        queryset = self.filter_queryset(self.get_queryset().all())
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
 
     @swagger_auto_schema(
         tags=['Post'],
@@ -25,7 +29,7 @@ class PostViewSet(generics.ListCreateAPIView):
         operation_summary='Test',
     )
     def post(self, request, *args, **kwargs):
-        return super().create(request, *args, **kwargs)
+        return super().post(request, *args, **kwargs)
 
 class PostDetailViewSet(generics.RetrieveUpdateDestroyAPIView):
     lookup_field = 'uuid'
