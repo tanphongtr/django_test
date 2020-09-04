@@ -67,6 +67,7 @@ SWAGGER_SETTINGS = {
 # LOGOUT_URL = 'rest_framework:logout'
 
 REST_FRAMEWORK = {
+    # 'DATETIME_FORMAT': '%H',
     # 'DEFAULT_AUTHENTICATION_CLASSES': [
     #     'rest_framework.authentication.BasicAuthentication',
     #     'rest_framework.authentication.SessionAuthentication',
@@ -75,6 +76,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 2,
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    
 }
 
 REDOC_SETTINGS = {

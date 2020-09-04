@@ -4,9 +4,9 @@ from django.db import models
 
 class Track(models.Model):
     album = models.OneToOneField(Album, related_name='tracks', on_delete=models.CASCADE)
-    order = models.IntegerField()
+    order = models.PositiveIntegerField()
     title = models.CharField(max_length=100)
-    duration = models.IntegerField()
+    duration = models.PositiveIntegerField()
 
     class Meta:
         unique_together = ['album', 'order']

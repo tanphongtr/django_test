@@ -4,14 +4,15 @@ from rest_framework import serializers
 class TrackSerializer(serializers.ModelSerializer):
     class Meta:
         model = Track
-        fields = ['order', 'title', 'duration']
+        # fields = ['order', 'title', 'duration']
+        fields = '__all__'
 
 class AlbumSerializer(serializers.ModelSerializer):
     tracks = TrackSerializer()
 
     class Meta:
         model = Album
-        fields = ['album_name', 'artist', 'tracks']
+        fields = ['album_name', 'artist', 'tracks'] # nếu khai báo như thế này sẽ chia part trong DRF
 
     # def create(self, validated_data):
     #     tracks_data = validated_data.pop('tracks')

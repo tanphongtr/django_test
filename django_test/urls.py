@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls import url
 
-from .api import AlbumViewSet, TrackViewSet, UserViewSet, UserDetailViewSet, PostViewSet, PostDetailViewSet
+from .api import (AlbumViewSet, TrackViewSet, UserViewSet, UserDetailViewSet, PostViewSet, PostDetailViewSet, TrackDetailViewSet)
 
 
 from rest_framework import permissions
@@ -46,6 +46,7 @@ urlpatterns = [
     # path('upload/', UploadFilesViewSet.as_view()),
     path('albums/', AlbumViewSet.as_view()),
     path('tracks/', TrackViewSet.as_view()),
+    path('tracks/<str:id>/', TrackDetailViewSet.as_view()),
     path('employee/', UserViewSet.as_view()),
     path('employee/<str:id>/', UserDetailViewSet.as_view()),
     # path('posts/', PostViewSet.as_view()),

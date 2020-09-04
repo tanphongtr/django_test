@@ -47,6 +47,11 @@ class TrackViewSet(generics.ListCreateAPIView):
     serializer_class = TrackSerializer
     pass
 
+class TrackDetailViewSet(generics.RetrieveUpdateDestroyAPIView):
+    lookup_field = 'id'
+    queryset = Track.objects.all()
+    serializer_class = TrackSerializer
+    pass
 
 class UserViewSet(generics.ListCreateAPIView):
     queryset = User.objects.all()
