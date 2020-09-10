@@ -17,7 +17,16 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls import url
 
-from .api import (AlbumViewSet, TrackViewSet, UserViewSet, UserDetailViewSet, PostViewSet, PostDetailViewSet, TrackDetailViewSet)
+from .api import (AlbumViewSet,
+                  TrackViewSet,
+                  UserViewSet,
+                  UserDetailViewSet,
+                  PostViewSet,
+                  PostDetailViewSet,
+                  TrackDetailViewSet,
+                  BaseUserViewSet,
+                  LoginViewSet
+                  )
 
 
 from rest_framework import permissions
@@ -49,12 +58,14 @@ urlpatterns = [
     path('tracks/<str:id>/', TrackDetailViewSet.as_view()),
     path('employee/', UserViewSet.as_view()),
     path('employee/<str:id>/', UserDetailViewSet.as_view()),
+    path('base-users/', BaseUserViewSet.as_view()),
+    path('login/', LoginViewSet.as_view()),
     # path('posts/', PostViewSet.as_view()),
     # path('posts/<str:uuid>/', PostDetailViewSet.as_view()),
     # url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path('docs/', schema_view.with_ui('swagger',
                                       cache_timeout=0), name='schema-swagger-ui'),
     # path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-    
+
     path('api/', include('api.urls')),
 ]

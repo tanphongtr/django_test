@@ -1,11 +1,16 @@
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
 from rest_framework import status, generics
 from rest_framework.response import Response
 
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
+
 from drf_yasg.utils import swagger_auto_schema
 
-from .models import Album, Track, User, Post
+from .models import Album, Track, User, Post, BaseUser
 from .serializer import AlbumSerializer, TrackSerializer
-from .serializers import UserSerializer, PostSerializer
+from .serializers import UserSerializer, PostSerializer, BaseUserSerializer, LoginSerializer
 
 from rest_framework import filters
 from rest_framework.pagination import PageNumberPagination, CursorPagination, LimitOffsetPagination
@@ -47,11 +52,13 @@ class TrackViewSet(generics.ListCreateAPIView):
     serializer_class = TrackSerializer
     pass
 
+
 class TrackDetailViewSet(generics.RetrieveUpdateDestroyAPIView):
     lookup_field = 'id'
     queryset = Track.objects.all()
     serializer_class = TrackSerializer
     pass
+
 
 class UserViewSet(generics.ListCreateAPIView):
     queryset = User.objects.all()
@@ -105,14 +112,41 @@ class PostViewSet(generics.ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     pagination_class = LimitOffsetPagination
-    filter_backends = [filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend]
+    filter_backends = [filters.SearchFilter,
+                       filters.OrderingFilter, DjangoFilterBackend]
     search_fields = ['title', 'content', ]  # field like
     ordering_fields = '__all__'  # order by
     ordering = '-created_at'
     filterset_fields = ['title', ]  # field =
     pass
 
+
 class PostDetailViewSet(generics.RetrieveUpdateDestroyAPIView):
     lookup_field = 'uuid'
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+
+class BaseUserViewSet(generics.ListCreateAPIView):
+    # authentication_classes = [SessionAuthentication, BasicAuthentication]
+    # permission_classes = [IsAuthenticated]
+
+    queryset = BaseUser.objects.all()
+    serializer_class = BaseUserSerializer
+    pass
+
+
+class LoginViewSet(generics.GenericAPIView, ObtainAuthToken):
+    serializer_class = LoginSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data,
+                                           context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['username']
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({
+            'token': token.key,
+            'user_id': user.pk,
+            'email': user.email
+        })

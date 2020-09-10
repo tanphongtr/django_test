@@ -25,8 +25,9 @@ SECRET_KEY = '-k1jwx3_=j%4_q%nj1l_9v(j9a#*kf64i!&3_h3+l8)fj*em4j'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['*']
 
+# AUTH_USER_MODEL = 'django_test.BaseUser'
 
 # Application definition
 
@@ -44,6 +45,8 @@ INSTALLED_APPS = [
     'django_filters',
     'api',
     'app',
+    # 'django_extensions',
+    'rest_framework.authtoken',
 ]
 
 SWAGGER_SETTINGS = {
@@ -68,10 +71,9 @@ SWAGGER_SETTINGS = {
 
 REST_FRAMEWORK = {
     # 'DATETIME_FORMAT': '%H',
-    # 'DEFAULT_AUTHENTICATION_CLASSES': [
-    #     'rest_framework.authentication.BasicAuthentication',
-    #     'rest_framework.authentication.SessionAuthentication',
-    # ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
     # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.CursorPagination',
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 2,
@@ -129,8 +131,8 @@ DATABASES = {
         'NAME': 'django_test',
         'USER': 'root',
         'PASSWORD': '123456',
-        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
-        'PORT': '3366',
+        'HOST': 'mysql',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
         #     'OPTIONS': {
         #         'skip-ssl',
         #    },
