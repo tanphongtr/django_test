@@ -10,7 +10,8 @@ services:
         volumes:
             - .:/app
 
-networks:
+
+networks: # Sử dụng network đã có sẵn
     default:
         external:
             name: mysql_default

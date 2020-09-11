@@ -56,8 +56,8 @@ urlpatterns = [
     path('albums/', AlbumViewSet.as_view()),
     path('tracks/', TrackViewSet.as_view()),
     path('tracks/<str:id>/', TrackDetailViewSet.as_view()),
-    path('employee/', UserViewSet.as_view()),
-    path('employee/<str:id>/', UserDetailViewSet.as_view()),
+    path('users/', UserViewSet.as_view()),
+    path('users/<str:id>/', UserDetailViewSet.as_view()),
     path('base-users/', BaseUserViewSet.as_view()),
     path('login/', LoginViewSet.as_view()),
     # path('posts/', PostViewSet.as_view()),
@@ -65,7 +65,7 @@ urlpatterns = [
     # url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path('docs/', schema_view.with_ui('swagger',
                                       cache_timeout=0), name='schema-swagger-ui'),
-    # path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 
     path('api/', include('api.urls')),
 ]

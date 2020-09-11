@@ -63,8 +63,26 @@ class TrackDetailViewSet(generics.RetrieveUpdateDestroyAPIView):
 class UserViewSet(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    pass
 
+    @swagger_auto_schema(
+        tags=['User'],
+        operation_description='2222',
+        operation_id='Get User list',
+        operation_summary='Test',
+    )
+    def get(self, request, *args, **kwargs):
+        return super().get(self, request, *args, **kwargs)
+        pass
+
+    @swagger_auto_schema(
+        tags=['User'],
+        operation_description='2222',
+        operation_id='Create User',
+        operation_summary='Test',
+    )
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)
+        pass
 
 class UserDetailViewSet(generics.RetrieveUpdateDestroyAPIView):
     lookup_field = 'id'
@@ -78,7 +96,7 @@ class UserDetailViewSet(generics.RetrieveUpdateDestroyAPIView):
         operation_summary='Test',
     )
     def get(self, request, *args, **kwargs):
-        return super().retrieve(request, *args, **kwargs)
+        return super().get(request, *args, **kwargs)
 
     @swagger_auto_schema(
         tags=['User'],

@@ -2,7 +2,7 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-
+print(os.getenv('PHONGTRAN') )
 
 def main():
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_test.settings')

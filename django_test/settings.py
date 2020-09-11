@@ -70,7 +70,9 @@ SWAGGER_SETTINGS = {
 # LOGOUT_URL = 'rest_framework:logout'
 
 REST_FRAMEWORK = {
-    # 'DATETIME_FORMAT': '%H',
+    # 'DATETIME_FORMAT': '%s.%f', #unix timestamp
+    'DATETIME_FORMAT': '%s000.%f', # for Js
+    'DATE_FORMAT': '%s000.%f',
     'DEFAULT_AUTHENTICATION_CLASSES': [
         # 'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],

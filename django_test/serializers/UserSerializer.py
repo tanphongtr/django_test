@@ -6,7 +6,15 @@ class UserSerializer(serializers.ModelSerializer):
     profile = UserInfoSerializer()
     class Meta:
         model = User
-        fields = '__all__'
+        # fields = '__all__'
+        
+        # side part profile on Django REST framework
+        fields = (
+            'username',
+            'password',
+            'created_at',
+            'profile',
+        )
 
     def create(self, validated_data):
         profile_data = validated_data.pop('profile')
