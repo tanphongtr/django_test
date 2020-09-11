@@ -4,11 +4,15 @@ services:
     api:
         container_name: django_test
         build: .
-        command: python manage.py runserver 0.0.0.0:8000
+        command: python manage.py runserver 0.0.0.0:8000 # Docker
         ports:
             - '8001:8000'
         volumes:
-            - .:/app
+            - .:/app # mount code in local vs code in docker
+
+        # depends_on:
+        #     - db
+        #     - redis
 
 
 networks: # Sử dụng network đã có sẵn
