@@ -17,9 +17,23 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls import url
 
+from rest_framework.authtoken import views
+
 from .post import PostViewSet, PostDetailViewSet
+from .parent import ParentViewSet, ParentDetailViewSet
+from .child import ChildViewSet, ChildDetailViewSet
+from .auth import AuthViewSet
 
 urlpatterns = [
     path('posts/', PostViewSet.as_view()),
     path('posts/<str:uuid>', PostDetailViewSet.as_view()),
+
+    path('parents/', ParentViewSet.as_view()),
+    path('parents/<str:uuid>', ParentDetailViewSet.as_view()),
+
+    path('childs/', ChildViewSet.as_view()),
+    path('childs/<str:id>', ChildDetailViewSet.as_view()),
+    path('api-token-auth/', views.obtain_auth_token),
+    path('auth/', AuthViewSet.as_view()),
+    
 ]

@@ -70,11 +70,13 @@ SWAGGER_SETTINGS = {
 # LOGOUT_URL = 'rest_framework:logout'
 
 REST_FRAMEWORK = {
-    # 'DATETIME_FORMAT': '%s.%f', #unix timestamp
-    'DATETIME_FORMAT': '%s000.%f', # for Js
-    'DATE_FORMAT': '%s000.%f',
+    'DATETIME_FORMAT': '%s.%f', #unix timestamp
+    # 'DATETIME_FORMAT': '%s000.%f', # for Js
+    # 'DATE_FORMAT': '%s000.%f',
     'DEFAULT_AUTHENTICATION_CLASSES': [
         # 'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ],
     # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.CursorPagination',
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
@@ -133,8 +135,8 @@ DATABASES = {
         'NAME': 'django_test',
         'USER': 'root',
         'PASSWORD': '123456',
-        'HOST': 'mysql',   # Or an IP Address that your DB is hosted on
-        'PORT': '3306',
+        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'PORT': '3366',
         #     'OPTIONS': {
         #         'skip-ssl',
         #    },

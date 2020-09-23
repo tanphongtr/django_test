@@ -10,5 +10,9 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    test = models.TextField(max_length=500, null=True, default='ABC')
+    test2 = models.TextField(max_length=500, null=False, default='ABC')
+    test3 = models.TextField(max_length=500, default='ABC')
+
     class Meta:
         db_table = 'posts'
