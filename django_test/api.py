@@ -46,6 +46,12 @@ class AlbumViewSet(generics.ListCreateAPIView):
     serializer_class = AlbumSerializer
     pass
 
+class AlbumDetailViewSet(generics.RetrieveUpdateDestroyAPIView):
+    lookup_field = 'id'
+    queryset = Album.objects.all()
+    serializer_class = AlbumSerializer
+    pass
+
 
 class TrackViewSet(generics.ListCreateAPIView):
     queryset = Track.objects.all()

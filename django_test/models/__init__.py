@@ -6,3 +6,4 @@ from .post import Post
 from .default_tbl import DefaultTable
 from .parent import Parent
 from .child import Child
+from .token import Token

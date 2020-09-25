@@ -25,7 +25,8 @@ from .api import (AlbumViewSet,
                   PostDetailViewSet,
                   TrackDetailViewSet,
                   BaseUserViewSet,
-                  LoginViewSet
+                  LoginViewSet,
+                  AlbumDetailViewSet
                   )
 
 
@@ -54,6 +55,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     # path('upload/', UploadFilesViewSet.as_view()),
     path('albums/', AlbumViewSet.as_view()),
+    path('albums/<str:id>/', AlbumDetailViewSet.as_view()),
     path('tracks/', TrackViewSet.as_view()),
     path('tracks/<str:id>/', TrackDetailViewSet.as_view()),
     path('users/', UserViewSet.as_view()),

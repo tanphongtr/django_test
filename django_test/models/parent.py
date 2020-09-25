@@ -6,4 +6,4 @@ class Parent(models.Model):
         db_table = 'parent'
     
     name = models.CharField(max_length=255)
-    child = models.ManyToManyField(Child, related_name='child')
+    child = models.ManyToManyField(Child, related_name='child', )

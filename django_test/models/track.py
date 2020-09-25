@@ -3,7 +3,7 @@ from .album import Album
 from django.db import models
 
 class Track(models.Model):
-    album = models.OneToOneField(Album, related_name='tracks', on_delete=models.CASCADE)
+    album = models.OneToOneField(Album, related_name='tracks', on_delete=models.SET_NULL, null=True)
     order = models.PositiveIntegerField()
     title = models.CharField(max_length=100)
     duration = models.PositiveIntegerField()
