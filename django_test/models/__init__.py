@@ -7,3 +7,5 @@ from .default_tbl import DefaultTable
 from .parent import Parent
 from .child import Child
 from .token import Token
+from .file import File
+from .file_detail import FileDetail

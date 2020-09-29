@@ -24,6 +24,8 @@ from .parent import ParentViewSet, ParentDetailViewSet
 from .child import ChildViewSet, ChildDetailViewSet
 from .auth import AuthViewSet
 
+from .file import FileViewSet
+
 urlpatterns = [
     path('posts/', PostViewSet.as_view()),
     path('posts/<str:uuid>', PostDetailViewSet.as_view()),
@@ -35,5 +37,8 @@ urlpatterns = [
     path('childs/<str:id>', ChildDetailViewSet.as_view()),
     path('api-token-auth/', views.obtain_auth_token),
     path('auth/', AuthViewSet.as_view()),
+
+    path('files/', FileViewSet.as_view()),
+
     
 ]

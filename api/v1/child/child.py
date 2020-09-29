@@ -7,6 +7,7 @@ from django_test.models import Child
 from .serializer import ChildSerializer
 
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
+from ..auth.authentication import _TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
 from rest_framework import filters
@@ -15,7 +16,8 @@ from django_filters.rest_framework import DjangoFilterBackend
 # from .pagination import LinkHeaderPagination, CustomPagination as CustomPagination2
 
 class ChildViewSet(generics.ListCreateAPIView):
-    authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication]
+    # authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication]
+    authentication_classes = [_TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
     queryset = Child.objects.all()
@@ -33,7 +35,7 @@ class ChildViewSet(generics.ListCreateAPIView):
                 name='Authorization',
                 in_=openapi.IN_HEADER,
                 type=openapi.TYPE_STRING,
-                required=True,
+                required=False,
                 description='Token <token>'
             ),
         ],

@@ -63,14 +63,21 @@ SWAGGER_SETTINGS = {
     # },
     # 'APIS_SORTER': 'alpha',
     'SUPPORTED_SUBMIT_METHODS': ['get', 'post', 'put', 'delete', 'patch'],
-    'OPERATIONS_SORTER': 'alpha'
+    'OPERATIONS_SORTER': 'alpha',
+    'SECURITY_DEFINITIONS': {
+        'api_key': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    },
 }
 
 # LOGIN_URL = 'rest_framework:login'
 # LOGOUT_URL = 'rest_framework:logout'
 
 REST_FRAMEWORK = {
-    'DATETIME_FORMAT': '%s.%f', #unix timestamp
+    # 'DATETIME_FORMAT': '%s.%f', #unix timestamp
     # 'DATETIME_FORMAT': '%s000.%f', # for Js
     # 'DATE_FORMAT': '%s000.%f',
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -181,3 +188,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/files/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "files")
