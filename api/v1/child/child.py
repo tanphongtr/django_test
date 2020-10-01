@@ -4,7 +4,7 @@ from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 
 from django_test.models import Child
-from .serializer import ChildSerializer
+from .serializer import ChildSerializer, ChildCreateSerializer
 
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
 from ..auth.authentication import _TokenAuthentication
@@ -17,8 +17,8 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 class ChildViewSet(generics.ListCreateAPIView):
     # authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication]
-    authentication_classes = [_TokenAuthentication]
-    permission_classes = [IsAuthenticated]
+    # authentication_classes = [_TokenAuthentication]
+    # permission_classes = [IsAuthenticated]
 
     queryset = Child.objects.all()
     serializer_class = ChildSerializer

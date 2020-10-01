@@ -2,7 +2,7 @@ from rest_framework import status, generics
 from rest_framework.response import Response
 from drf_yasg.utils import swagger_auto_schema
 from django_test.models import Post
-from .serializers import PostSerializer
+from .serializers import PostSerializer, PostCreateSerializer
 
 from rest_framework import filters
 from rest_framework.pagination import PageNumberPagination, CursorPagination, LimitOffsetPagination
@@ -39,6 +39,7 @@ class PostViewSet(generics.ListCreateAPIView):
         operation_summary='Test',
     )
     def post(self, request, *args, **kwargs):
+        self.serializer_class = PostCreateSerializer
         return super().post(request, *args, **kwargs)
 
 
