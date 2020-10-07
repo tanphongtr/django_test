@@ -3,13 +3,13 @@ from .album import Album
 from django.db import models
 
 class Track(models.Model):
-    album = models.OneToOneField(Album, related_name='tracks', on_delete=models.SET_NULL, null=True)
+    album = models.ForeignKey(Album, related_name='tracks', on_delete=models.SET_NULL, null=True)
     order = models.PositiveIntegerField()
     title = models.CharField(max_length=100)
     duration = models.PositiveIntegerField()
 
     class Meta:
-        unique_together = ['album', 'order']
+        # unique_together = ['album', 'order']
         ordering = ['order']
         db_table = 'tracks'
 
