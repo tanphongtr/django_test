@@ -9,8 +9,11 @@ from rest_framework.pagination import PageNumberPagination, CursorPagination, Li
 from django_filters.rest_framework import DjangoFilterBackend
 # from .pagination import LinkHeaderPagination, CustomPagination as CustomPagination2
 
+from rest_framework.exceptions import (APIException, MethodNotAllowed, PermissionDenied, NotFound)
+
 class PostViewSet(generics.ListCreateAPIView):
     queryset = Post.objects.all()
+    # print('======', queryset.query)
     serializer_class = PostSerializer
     pagination_class = LimitOffsetPagination
     filter_backends = [filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend]
@@ -46,7 +49,16 @@ class PostViewSet(generics.ListCreateAPIView):
 class PostDetailViewSet(generics.RetrieveUpdateDestroyAPIView):
     lookup_field = 'uuid'
     queryset = Post.objects.all()
+    # print('======', list(queryset))
+    
     serializer_class = PostSerializer
+
+    def get_object(self):
+        try:
+            instance = super().get_object()
+        except:
+            raise NotFound(detail="LKDLSKLKSLD")
+        return instance
 
     @swagger_auto_schema(
         tags=['Post'],
@@ -55,7 +67,9 @@ class PostDetailViewSet(generics.RetrieveUpdateDestroyAPIView):
         operation_summary='Test',
     )
     def get(self, request, *args, **kwargs):
-        return super().get(request, *args, **kwargs)
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
 
     @swagger_auto_schema(
         tags=['Post'],

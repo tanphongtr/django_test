@@ -28,13 +28,13 @@ from .file import FileViewSet
 
 urlpatterns = [
     path('posts/', PostViewSet.as_view()),
-    path('posts/<str:uuid>', PostDetailViewSet.as_view()),
+    path('posts/<str:uuid>/', PostDetailViewSet.as_view()),
 
     path('parents/', ParentViewSet.as_view()),
-    path('parents/<str:uuid>', ParentDetailViewSet.as_view()),
+    path('parents/<str:uuid>/', ParentDetailViewSet.as_view()),
 
     path('childs/', ChildViewSet.as_view()),
-    path('childs/<str:id>', ChildDetailViewSet.as_view()),
+    path('childs/<str:id>/', ChildDetailViewSet.as_view()),
     path('api-token-auth/', views.obtain_auth_token),
     path('auth/', AuthViewSet.as_view()),
 

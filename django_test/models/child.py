@@ -6,4 +6,4 @@ class Child(models.Model):
         db_table = 'child'
 
     name = models.CharField(max_length=255)
-    parent = models.ManyToManyField(Parent, related_name='parent')
+    parent = models.ForeignKey(Parent, related_name='parent', on_delete=models.CASCADE, null=True, )

@@ -3,7 +3,7 @@ from django_test.models import Child
 from ..parent.serializer import ParentSerializer
 
 class ChildSerializer(serializers.ModelSerializer):
-    parent = ParentSerializer()
+    # parent = ParentSerializer()
     class Meta:
         model = Child
         fields = '__all__'

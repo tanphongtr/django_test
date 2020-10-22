@@ -16,9 +16,9 @@ from django_filters.rest_framework import DjangoFilterBackend
 # from .pagination import LinkHeaderPagination, CustomPagination as CustomPagination2
 
 class ChildViewSet(generics.ListCreateAPIView):
-    # authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication]
+    authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication]
     # authentication_classes = [_TokenAuthentication]
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     queryset = Child.objects.all()
     serializer_class = ChildSerializer
@@ -49,6 +49,11 @@ class ChildViewSet(generics.ListCreateAPIView):
     #     serializer = self.get_serializer(queryset, many=True)
     #     return Response(serializer.data)
     def get(self, request, *args, **kwargs):
+
+        a = self.request.query_params.get('test1', None)
+
+        print(a)
+
         return super().get(request, *args, **kwargs)
 
     @swagger_auto_schema(
