@@ -8,7 +8,7 @@ class PostSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def get_test(self, arg):
-        
+        # print('=============================', self)
         print(arg, self.context['request'].user)
         return 1
 

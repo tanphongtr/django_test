@@ -8,6 +8,7 @@ class FileDetailSerializer(serializers.ModelSerializer):
 
 class FileSerializer(serializers.ModelSerializer):
     # file = FileDetailSerializer()
+    file_url = serializers.FileField()
     class Meta:
         model = File
         fields = '__all__'

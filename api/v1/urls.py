@@ -22,7 +22,13 @@ from rest_framework.authtoken import views
 from .post import PostViewSet, PostDetailViewSet
 from .parent import ParentViewSet, ParentDetailViewSet
 from .child import ChildViewSet, ChildDetailViewSet
-from .auth import AuthViewSet
+from .json_s import JsonSViewSet
+from .auth import (
+    AuthViewSet,
+    AuthGroupViewSet,
+    PermissonViewSet,
+    ContentTypeViewSet,
+)
 
 from .file import FileViewSet
 
@@ -37,8 +43,12 @@ urlpatterns = [
     path('childs/<str:id>/', ChildDetailViewSet.as_view()),
     path('api-token-auth/', views.obtain_auth_token),
     path('auth/', AuthViewSet.as_view()),
+    path('auth-group/', AuthGroupViewSet.as_view()),
+    path('auth-permission/', PermissonViewSet.as_view()),
+    path('auth-content-type/', ContentTypeViewSet.as_view()),
 
     path('files/', FileViewSet.as_view()),
+    path('jsons/', JsonSViewSet.as_view()),
 
     
 ]

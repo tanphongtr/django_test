@@ -2,21 +2,43 @@ from rest_framework import status, generics
 from rest_framework.response import Response
 from drf_yasg.utils import swagger_auto_schema
 from django_test.models import Post
-from .serializers import PostSerializer, PostCreateSerializer
-
+from .serializers import (
+    PostSerializer,
+    PostCreateSerializer,
+)
 from rest_framework import filters
-from rest_framework.pagination import PageNumberPagination, CursorPagination, LimitOffsetPagination
+from rest_framework.pagination import (
+    PageNumberPagination,
+    CursorPagination,
+    LimitOffsetPagination,
+)
 from django_filters.rest_framework import DjangoFilterBackend
 # from .pagination import LinkHeaderPagination, CustomPagination as CustomPagination2
 
-from rest_framework.exceptions import (APIException, MethodNotAllowed, PermissionDenied, NotFound)
+from rest_framework.exceptions import (
+    APIException,
+    MethodNotAllowed,
+    PermissionDenied,
+    NotFound,
+)
+from drf_yasg import openapi
+
+class StandardPagination(PageNumberPagination):
+    page_size = 2
+    page_size_query_param = 'page_size'
+    max_page_size = 10
+    ordering = '-created_at'
 
 class PostViewSet(generics.ListCreateAPIView):
     queryset = Post.objects.all()
     # print('======', queryset.query)
     serializer_class = PostSerializer
-    pagination_class = LimitOffsetPagination
-    filter_backends = [filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend]
+    pagination_class = StandardPagination
+    filter_backends = [
+        filters.SearchFilter,
+        filters.OrderingFilter,
+        DjangoFilterBackend,
+    ]
     search_fields = ['title', 'content', ]  # field like
     ordering_fields = '__all__'  # order by
     ordering = '-created_at'
@@ -27,6 +49,7 @@ class PostViewSet(generics.ListCreateAPIView):
         operation_description='',
         operation_id='List Post',
         operation_summary='Test',
+        security=[],
     )
     # def get(self, request, *args, **kwargs):
     #     queryset = self.filter_queryset(self.get_queryset().all())
@@ -40,6 +63,13 @@ class PostViewSet(generics.ListCreateAPIView):
         operation_description='',
         operation_id='Create Post',
         operation_summary='Test',
+        # request_body=openapi.Schema(
+        #     type=openapi.TYPE_OBJECT,
+        #     required=['username'],
+        #     properties={
+        #         'username': openapi.Schema(type=openapi.TYPE_STRING)
+        #     },
+        # ),
     )
     def post(self, request, *args, **kwargs):
         self.serializer_class = PostCreateSerializer
@@ -53,12 +83,26 @@ class PostDetailViewSet(generics.RetrieveUpdateDestroyAPIView):
     
     serializer_class = PostSerializer
 
+    serializers = {
+        'list':    PostSerializer,
+        'detail':  PostCreateSerializer,
+        # etc.
+    }
+
     def get_object(self):
         try:
             instance = super().get_object()
         except:
             raise NotFound(detail="LKDLSKLKSLD")
         return instance
+
+    def get_serializer_class(self):
+        from pprint import pprint
+        pprint ( '=====A', self.request.method )
+        return self.serializers.get(
+            self.action,
+            self.serializers['default']
+        )
 
     @swagger_auto_schema(
         tags=['Post'],

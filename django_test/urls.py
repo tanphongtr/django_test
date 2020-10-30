@@ -47,6 +47,7 @@ schema_view = get_schema_view(
         terms_of_service="https://www.google.com/policies/terms/",
         contact=openapi.Contact(email="contact@snippets.local"),
         license=openapi.License(name="BSD License"),
+        validators=['ssv', 'flex'],
     ),
     public=True,
     permission_classes=(permissions.AllowAny,),
@@ -68,9 +69,8 @@ urlpatterns = [
     # path('posts/', PostViewSet.as_view()),
     # path('posts/<str:uuid>/', PostDetailViewSet.as_view()),
     # url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
-    path('docs/', schema_view.with_ui('swagger',
-                                      cache_timeout=0), name='schema-swagger-ui'),
+    path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 
-    path('api/', include('api.urls')),
+    path('', include('api.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -10,3 +10,4 @@ from .token import Token
 from .file import File
 from .file_detail import FileDetail
 from .unique_index import UniqueIndex
+from .json_s import JsonS
