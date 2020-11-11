@@ -19,7 +19,6 @@ from django.conf.urls import url
 from django.conf import settings
 from django.conf.urls.static import static
 
-
 from .api import (AlbumViewSet,
                   TrackViewSet,
                   UserViewSet,
@@ -32,6 +31,7 @@ from .api import (AlbumViewSet,
                   AlbumDetailViewSet
                   )
 
+from .view import HomePageViewSet, FileResponseViewSet
 
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
@@ -72,5 +72,7 @@ urlpatterns = [
     path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 
-    path('', include('api.urls')),
+    path('', FileResponseViewSet),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = None

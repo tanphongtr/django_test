@@ -89,12 +89,12 @@ class PostDetailViewSet(generics.RetrieveUpdateDestroyAPIView):
         # etc.
     }
 
-    def get_object(self):
-        try:
-            instance = super().get_object()
-        except:
-            raise NotFound(detail="LKDLSKLKSLD")
-        return instance
+    # def get_object(self):
+    #     try:
+    #         instance = super().get_object()
+    #     except:
+    #         raise NotFound(detail="LKDLSKLKSLD")
+    #     return instance
 
     def get_serializer_class(self):
         from pprint import pprint

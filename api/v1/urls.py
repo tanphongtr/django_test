@@ -23,6 +23,7 @@ from .post import PostViewSet, PostDetailViewSet
 from .parent import ParentViewSet, ParentDetailViewSet
 from .child import ChildViewSet, ChildDetailViewSet
 from .json_s import JsonSViewSet
+from .test_serializer import TestSerializer1ViewSet
 from .auth import (
     AuthViewSet,
     AuthGroupViewSet,
@@ -49,6 +50,7 @@ urlpatterns = [
 
     path('files/', FileViewSet.as_view()),
     path('jsons/', JsonSViewSet.as_view()),
+    # path('serializer1/', TestSerializer1ViewSet.as_view()),
 
     
 ]
